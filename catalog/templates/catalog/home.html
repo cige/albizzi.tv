@@ -1,0 +1,9 @@
+<h1>Bienvenue sur Albizzi.tv</h1>
+
+<ul>
+{% for clip in clips %}
+    <li>
+        <a href="{% url 'clip' clip.id %}">{{ clip.title }}</a>
+    </li>
+{% endfor %}
+</ul>
