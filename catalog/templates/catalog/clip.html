@@ -1,4 +1,27 @@
-<h1>{{ clip.title }}<h1>
-<h2>{{ clip.interpreter }}<h2>
-
-<script src="{{ clip.jwplayer_url }}"></script>
+{% extends "catalog/base.html" %}
+{% block content %}
+    <div class="clip">
+        <div class="title">À propos</div>
+        <div class="details">
+            <div class="details__section">
+                <label> Titre : </label>
+                <span>{{ clip.title }}<span>
+            </div>
+            <div class="details__section">
+                <label> Compositeur : </label>
+                <span>{{ clip.composer }}<span>
+            </div>
+            <div class="details__section">
+                <label> Interprète : </label>
+                <span>{{ clip.interpreter }}<span>
+            </div>
+            <div class="details__section">
+                <label> Période : </label>
+                <span>{{ clip.period }}<span>
+            </div>
+        </div>
+        <div class="player">
+            <script src="https://cdn.jwplayer.com/players/{{ clip.media_id }}-{{ player_id }}.js"></script>
+        </div> 
+    </div>
+{% endblock content %}

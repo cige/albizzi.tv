@@ -25,7 +25,10 @@ SECRET_KEY = 'owkor^r^1f$*&vwi37*)tw336m_t(afo(clam3plmadnywlz-2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'http://clementgeorge.pythonanywhere.com/'
+]
 
 
 # Application definition
@@ -121,3 +124,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+# Jwplayer
+
+PLAYER_ID = 'WjoNOMXJ'
+
+# Github
+
+GITHUB_REPO = 'https://github.com/cige/albizzi.tv'

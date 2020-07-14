@@ -1,0 +1,128 @@
+body {
+    background: #2F3542;  /* fallback for old browsers */
+    color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    margin: unset;
+}
+
+header {
+    font-size: 20px;
+    padding: 15px 30px;
+    background: #475470;
+}
+
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+footer {
+    margin-top: auto;
+    background: #475470;
+    height: 60px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer img {
+    height: 20px;
+}
+
+.clip {
+    padding: 5px 30px;
+}
+
+.details {
+    font-size: 14px;
+    display:flex;
+    flex-direction: column;
+}
+
+.details__section {
+    white-space: nowrap;
+}
+
+.details__section label {
+    font-weight: 600;
+    color: #8a8a8a;
+    margin-right: 8px;
+}
+
+.clip .player {
+    width: 600px;
+    margin: 30px 0;
+}
+
+.browser {
+    padding: 10px 30px;
+    font-size: 14px;
+}
+
+.filters {
+    display:flex;
+}
+
+.filters .filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 180px;
+}
+
+.filters .filter label {
+    font-weight: 600;
+    color: #8a8a8a;
+}
+
+.filter__option.active {
+    color: #f11095;
+}
+
+.filters .filter a {
+    cursor: pointer;
+}
+
+.catalog {
+    overflow: auto;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex:1;
+    margin-bottom: 5px;
+    flex-basis: 50%;
+}
+
+.tile img {
+    height: 90px;
+    width: 120px;
+}
+
+.overview {
+    padding: 8px;
+}
+
+.tile:hover .overview {
+    display: block;
+}
+
+.empty {
+    color:gray;
+}
+
+.reset {
+    cursor: pointer;
+}
+
+.title {
+    padding: 15px 0px;
+}

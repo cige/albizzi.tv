@@ -1,9 +1,81 @@
-<h1>Bienvenue sur Albizzi.tv</h1>
+{% extends "catalog/base.html" %}
 
-<ul>
-{% for clip in clips %}
-    <li>
-        <a href="{% url 'clip' clip.id %}">{{ clip.title }}</a>
-    </li>
-{% endfor %}
-</ul>
+{% load static %}
+{% block head %}
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+    <script type='text/javascript'>
+        var clips = [
+            {% for clip in clips %}
+        {% if not forloop.first %},{% endif %}
+        {
+            title: "{{ clip.title }}",
+            interpreter: "{{ clip.interpreter }}",
+            media_id: "{{ clip.media_id }}",
+            composer: "{{ clip.composer }}",
+            href: "/media/{{clip.id}}",
+            thumbnail: "https://cdn.jwplayer.com/thumbs/{{ clip.media_id }}-120.jpg"
+        }
+    {% endfor %}
+    ]
+    </script>
+{% endblock %}
+{% block content %}
+    <div id="browser" class="browser">
+        <div class="title">
+            <span>Filtrer</span>
+            <span v-if="isFiltered" class="reset" v-on:click="reset()">
+                (Réinitialiser)
+            </span>
+            </div>
+        <div class="filters">
+            <div class="filter">
+                <label>Par compositeur:</label>
+                <a class="filter__option"
+                v-for="comp in composers"
+                v-bind:class="{ active: comp.active }"
+                v-on:click="filterWith('composer',comp.name)">
+                    <span v-if="comp.nb || comp.active">[[comp.name]] ([[comp.nb]])</span>
+                    <span v-else class="empty">[[comp.name]]</span>
+                </a>
+            </div>
+            <div class="filter">
+                <label>Par interprète:</label>
+                <a class="filter__option"
+                v-for="int in interpreters"
+                v-bind:class="{ active: int.active }"
+                v-on:click="filterWith('interpreter',int.name)">
+                    <span v-if="int.nb || int.active">[[int.name]] ([[int.nb]])</span>
+                    <span v-else class="empty">[[int.name]]</span>
+                </a>
+            </div>
+        </div>
+        <div class="title">[[filteredClips.length]] Résultat(s)</div>
+        <div class="catalog">
+            <div class="tile" v-for="clip in filteredClips">
+                <a v-bind:href="clip.href">
+                    <img v-bind:src="clip.thumbnail">
+                </a>
+                <div class="overview">
+                    <div class="details">
+                        <div class="details__section">
+                            <label> Titre : </label>
+                            <span>[[clip.title]]<span>
+                        </div>
+                        <div class="details__section">
+                            <label> Compositeur : </label>
+                            <span>[[clip.composer]]<span>
+                        </div>
+                        <div class="details__section">
+                            <label> Interprète : </label>
+                            <span>[[clip.interpreter]]<span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        initBrowser('#browser', clips)
+    </script>
+{% endblock %}

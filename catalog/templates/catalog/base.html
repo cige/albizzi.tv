@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+   <title>{% block title %}Albizzi.tv{% endblock %}</title>
+   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+   {% block head %}{% endblock %}
+</head>
+<body>
+<header>
+    <a href="{% url 'home' %}">Albizzi.tv</a>
+</header>
+<section id="content">
+       {% block content %}{% endblock %}
+</section>
+<footer>
+    <span>&copy; Albizzi.tv </span>
+    <a href="{{ github_repo }}">
+        <img src="{% static 'img/github.png' %}">
+    </a>
+    </footer>
+</body>
+</html>
