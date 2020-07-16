@@ -24,6 +24,7 @@ function initBrowser(el, clips){
     const data = {
         clips,
         filteredClips: clips,
+        hasFilterActive: false,
         ... FILTERS.reduce((acc, f) => {
             acc[f.key] = null
             return acc
@@ -31,10 +32,6 @@ function initBrowser(el, clips){
     }
 
     const computed = {
-        /** Compute whether a filter is currently active */
-        isFiltered: function(){
-            return FILTERS.some(f => this[f] !== null)
-        },
         /** 
          *  For each filters, create a computed list containing all unique values for such a filter.
          *  For instance, if we have a filter named 'composer', it will create a computed list named 'composers'
@@ -57,7 +54,14 @@ function initBrowser(el, clips){
 
     const methods = {
         applyFilter: function(filter,value){
-            this[filter.key] = value
+            if(this[filter.key] == value) {
+                this[filter.key] = null // we desactivate the filter in case it is already applied
+                this.hasFilterActive = FILTERS.some(f => this[f.key] !== null)
+            }
+            else {
+                this[filter.key] = value
+                this.hasFilterActive = true
+            }
             this.filteredClips = this.clips.filter(clip => FILTERS.every(f => {
                 return this[f.key] === null // or the filter is 'off'
                 || this[f.key] == clip[f.key] // or both values match
@@ -66,6 +70,7 @@ function initBrowser(el, clips){
         reset: function(){
             FILTERS.forEach(filter => this[filter.key] = null)
             this.filteredClips = this.clips
+            this.hasFilterActive = false
         },
         values: function(filter){
             return this[filter.key + 's']

@@ -25,7 +25,7 @@
     <div id="browser" class="browser">
         <div class="title">
             <span>Filtrer</span>
-            <span v-if="isFiltered" class="reset" v-on:click="reset()">
+            <span v-if="hasFilterActive" class="reset" v-on:click="reset()">
                 (Réinitialiser)
             </span>
             </div>
