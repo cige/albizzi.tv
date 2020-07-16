@@ -13,6 +13,7 @@
             interpreter: "{{ clip.interpreter }}",
             media_id: "{{ clip.media_id }}",
             composer: "{{ clip.composer }}",
+            period: "{{ clip.period }}",
             href: "/media/{{clip.id}}",
             thumbnail: "https://cdn.jwplayer.com/thumbs/{{ clip.media_id }}-120.jpg"
         }
@@ -29,24 +30,14 @@
             </span>
             </div>
         <div class="filters">
-            <div class="filter">
-                <label>Par compositeur:</label>
+            <div v-for="filter in FILTERS" class="filter">
+                <label>[[filter.label]]:</label>
                 <a class="filter__option"
-                v-for="comp in composers"
-                v-bind:class="{ active: comp.active }"
-                v-on:click="filterWith('composer',comp.name)">
-                    <span v-if="comp.nb || comp.active">[[comp.name]] ([[comp.nb]])</span>
-                    <span v-else class="empty">[[comp.name]]</span>
-                </a>
-            </div>
-            <div class="filter">
-                <label>Par interprète:</label>
-                <a class="filter__option"
-                v-for="int in interpreters"
-                v-bind:class="{ active: int.active }"
-                v-on:click="filterWith('interpreter',int.name)">
-                    <span v-if="int.nb || int.active">[[int.name]] ([[int.nb]])</span>
-                    <span v-else class="empty">[[int.name]]</span>
+                v-for="value in values(filter)"
+                v-bind:class="{ active: value.active }"
+                v-on:click="applyFilter(filter,value.name)">
+                    <span v-if="value.nb || value.active">[[value.name]] ([[value.nb]])</span>
+                    <span v-else class="empty">[[value.name]]</span>
                 </a>
             </div>
         </div>

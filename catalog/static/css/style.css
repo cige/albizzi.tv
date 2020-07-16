@@ -71,7 +71,7 @@ footer img {
 .filters .filter {
     display: flex;
     flex-direction: column;
-    min-width: 180px;
+    margin-right: 20px;
 }
 
 .filters .filter label {
